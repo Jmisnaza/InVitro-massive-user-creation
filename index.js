@@ -5,7 +5,10 @@ const multer = require("multer")
 const app = express() 
 const fs = require("fs")
 const multiUserCreation = require("./modules/fbadmin")
+const user = require('./components/users/network')
 require('dotenv').config()
+
+app.use(express.json())
 
 //Access environment variables
 const port= process.env.PORT ? process.env.PORT : 8000
@@ -87,7 +90,8 @@ app.post("/uploadCSV",function (req, res, next) {
         } 
     }) 
 }) 
-    
+
+app.use('/register-user', user)
 // Take any port number of your choice which 
 // is not taken by any other process 
 app.listen(port,function(error) { 
